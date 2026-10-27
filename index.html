@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anderson | Portfólio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --bg: #1a1c23; --card: #22252d; --borda: #323642; --amarelo: #facc15; --amarelo-claro: #fde047; --texto: #fff; --cinza: #a1a1aa; }
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); background-image: radial-gradient(circle at 80% 0%, #2a2d36 0%, var(--bg) 60%); color: var(--texto); line-height: 1.6; }
+        
+        /* MENU */
+        .nav { position: fixed; top: 20px; width: 100%; display: flex; justify-content: center; z-index: 1000; }
+        nav { background: rgba(34, 37, 45, 0.9); border: 1px solid var(--borda); border-radius: 50px; padding: 12px 35px; display: flex; gap: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
+        nav a { color: var(--cinza); text-decoration: none; font-size: 14px; font-weight: 600; cursor: pointer; }
+        nav a:hover { color: var(--amarelo-claro); }
+
+        /* CONTAINER */
+        .container { max-width: 1200px; margin: 0 auto; padding: 120px 20px 60px 20px; display: flex; flex-direction: column; gap: 30px; }
+        .box { background: var(--card); border: 1px solid var(--borda); border-radius: 24px; padding: 40px; transition: 0.4s; position: relative; overflow: hidden; }
+        
+        /* FUNDOS DINÂMICOS */
+        .bg-hero { background-image: linear-gradient(rgba(34, 37, 45, 0.95), rgba(34, 37, 45, 0.95)), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop'); background-size: cover; background-position: center; }
+        .bg-sobre { background-image: linear-gradient(rgba(34, 37, 45, 0.96), rgba(34, 37, 45, 0.96)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1000&auto=format&fit=crop'); background-size: cover; background-position: center; }
+        .bg-habilidades { background-image: linear-gradient(rgba(34, 37, 45, 0.96), rgba(34, 37, 45, 0.96)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop'); background-size: cover; background-position: center; }
+        .bg-footer { background-image: linear-gradient(rgba(34, 37, 45, 0.95), rgba(34, 37, 45, 0.95)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop'); background-size: cover; background-position: center; }
+
+        /* HERO */
+        .hero { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+        .hero-text { flex: 1; min-width: 300px; z-index: 2; }
+        .hero h1 { font-size: 46px; margin: 0 0 15px 0; line-height: 1.1; }
+        .hero h1 span { color: var(--cinza); font-style: italic; }
+        .hero p { color: var(--cinza); font-size: 18px; margin-bottom: 30px; }
+        
+        /* BOTÕES */
+        .botoes { display: flex; gap: 12px; flex-wrap: wrap; }
+        .btn { padding: 14px 24px; border-radius: 50px; font-weight: 600; border: none; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 15px; text-decoration: none; }
+        .btn:hover { transform: translateY(-3px); }
+        .btn-wa { background: #25D366; color: #fff; }
+        .btn-in { background: #0077b5; color: #fff; }
+        .btn-em { background: #4f46e5; color: #fff; }
+        .btn-gh { background: #24292e; color: #fff; border: 1px solid #444d56; }
+        .btn-cv { background: #3b3f4a; color: var(--amarelo); border: 1px solid var(--amarelo); }
+        .btn-cv:hover { background: var(--amarelo); color: #111; }
+
+        /* FOTO */
+        .hero-img { position: relative; }
+        .foto { width: 280px; height: 280px; border-radius: 50%; object-fit: cover; border: 2px solid var(--borda); position: relative; z-index: 2; }
+        .glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; height: 300px; background: var(--amarelo); filter: blur(80px); opacity: 0.15; z-index: 1; border-radius: 50%; }
+
+        /* STATS */
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .stats h2 { font-size: 42px; color: var(--amarelo-claro); margin: 0 0 5px 0; }
+        .stats p { color: var(--cinza); margin: 0; font-size: 14px; font-weight: 600; }
+
+        /* SEÇÕES */
+        .titulo { font-size: 28px; margin-bottom: 30px; display: flex; align-items: center; gap: 10px; }
+        .sobre-box { background: rgba(26, 28, 35, 0.7); border: 1px solid var(--borda); padding: 25px; border-radius: 16px; margin-bottom: 20px; backdrop-filter: blur(5px); }
+        .sobre-box h3 { color: var(--amarelo-claro); margin-top: 0; }
+        .sobre-box p { margin: 0; color: var(--cinza); }
+
+        /* PROJETOS */
+        .grid-proj { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+        .card { background: var(--card); border: 1px solid var(--borda); border-radius: 20px; overflow: hidden; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-8px); border-color: var(--amarelo); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+        .card img { width: 100%; height: 250px; object-fit: cover; border-bottom: 1px solid var(--borda); }
+        .card-body { padding: 30px; flex: 1; display: flex; flex-direction: column; }
+        .card-body h3 { margin: 0 0 10px 0; font-size: 22px; }
+        .card-body p { font-size: 15px; color: var(--cinza); flex: 1; margin-bottom: 20px; }
+        .card-link { color: var(--amarelo-claro); font-weight: 600; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+
+        /* HABILIDADES */
+        .skills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+        .skill { background: rgba(26, 28, 35, 0.8); border: 1px solid rgba(250, 204, 21, 0.3); color: var(--amarelo-claro); padding: 10px 20px; border-radius: 50px; font-size: 15px; font-weight: 600; }
+
+        /* RODAPÉ */
+        .footer { text-align: center; padding: 60px 20px; border-radius: 24px; border: 1px solid var(--borda); margin-top: 20px; }
+        .footer h2 { font-size: 26px; }
+        .footer p { color: var(--cinza); margin-bottom: 30px; }
+        .email-link { display: block; margin-top: 30px; font-size: 18px; color: var(--cinza); text-decoration: none; }
+        .email-link:hover { color: var(--amarelo); }
+
+        /* PÁGINAS */
+        .pagina { display: none; background: var(--bg); min-height: 100vh; padding-top: 100px; padding-bottom: 80px; }
+        .pagina-content { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        .btn-voltar { display: inline-flex; align-items: center; background: var(--card); color: var(--texto); padding: 12px 24px; border-radius: 50px; cursor: pointer; margin-bottom: 40px; border: 1px solid var(--borda); font-weight: 600; }
+        .btn-voltar:hover { background: var(--amarelo); color: #111; }
+        .pagina h1 { font-size: 38px; color: var(--amarelo-claro); margin-bottom: 25px; }
+        .pagina h4 { font-size: 22px; margin-top: 40px; border-bottom: 1px solid var(--borda); padding-bottom: 8px; }
+        .pagina p, .pagina ul { color: var(--cinza); font-size: 17px; }
+        
+        /* CURRÍCULO */
+        .cv-box { background: var(--card); padding: 50px; border-radius: 16px; border: 1px solid var(--borda); box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative;}
+        .cv-box h1 { text-align: center; font-size: 32px; color: var(--texto); margin: 0 0 5px 0; }
+        .cv-box h2 { color: var(--amarelo-claro); font-size: 18px; border-bottom: 2px solid var(--amarelo); padding-bottom: 5px; margin-top: 35px; text-transform: uppercase; letter-spacing: 1px;}
+        .cv-box h3 { color: var(--texto); font-size: 18px; margin-bottom: 5px; margin-top: 20px; display: flex; justify-content: space-between; flex-wrap: wrap;}
+        .cv-box p { margin-bottom: 10px; color: var(--cinza); }
+        .cv-box ul { margin-top: 5px; margin-bottom: 20px; padding-left: 20px; color: var(--cinza); }
+        .cv-box li { margin-bottom: 8px; }
+        .cv-box strong { color: var(--texto); }
+        .cv-sub { text-align: center; font-size: 16px; color: var(--cinza); margin-bottom: 30px; }
+        .cv-data { font-size: 14px; color: var(--cinza); font-weight: normal; }
+        .btn-download { display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--amarelo); color: #111; font-weight: 700; padding: 15px; border-radius: 8px; text-decoration: none; margin-bottom: 30px; transition: 0.3s; font-size: 16px; }
+        .btn-download:hover { background: var(--amarelo-claro); transform: translateY(-3px); }
+
+        /* LIGHTBOX */
+        .imgs { display: flex; flex-direction: column; gap: 40px; margin-top: 50px; }
+        .imgs img { width: 100%; border-radius: 12px; border: 1px solid var(--borda); cursor: zoom-in; }
+        .lightbox { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; cursor: zoom-out; }
+        .lightbox img { max-width: 95%; max-height: 95vh; border-radius: 12px; }
+
+        @media (max-width: 900px) {
+            .hero { flex-direction: column-reverse; text-align: center; }
+            .botoes { justify-content: center; }
+            .cv-box { padding: 25px; }
+            .grid-proj { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav">
+        <nav>
+            <a onclick="voltarInicio()">Início</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#projetos">Projetos</a>
+            <a href="#habilidades">Habilidades</a>
+        </nav>
+    </div>
+
+    <!-- TELA PRINCIPAL -->
+    <div id="tela-principal" class="container">
+        
+        <div class="box hero bg-hero">
+            <div class="hero-text">
+                <span style="color: var(--amarelo-claro); font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Olá, eu sou Anderson!</span>
+                <h1>Construindo soluções em <span>Dados e Tecnologia.</span></h1>
+                <p>Mais de 10 anos de experiência em TI, direcionando minha carreira para Análise de Dados e Business Intelligence.</p>
+                <div class="botoes">
+                    <button class="btn btn-cv" onclick="abrirPagina('curriculo')"><i class="fas fa-file-alt"></i> Currículo</button>
+                    <a class="btn btn-wa" href="https://wa.me/5521979388819" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a class="btn btn-in" href="https://www.linkedin.com/in/andersonrdo/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a class="btn btn-em" href="mailto:anderson_rdo@hotmail.com"><i class="fas fa-envelope"></i> E-mail</a>
+                    <a class="btn btn-gh" href="https://github.com/anderson123451" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </div>
+            <div class="hero-img">
+                <div class="glow"></div>
+                <img src="Imagens/foto_perfil/foto_perfil.jpg" class="foto" alt="Anderson">
+            </div>
+        </div>
+
+        <div class="box stats">
+            <div><h2>10+</h2><p>Anos de Experiência</p></div>
+            <div><h2>SQL</h2><p>Bancos de Dados</p></div>
+            <div><h2>BI</h2><p>Power BI & Analytics</p></div>
+            <div><h2>N2</h2><p>Sustentação de TI</p></div>
+        </div>
+
+        <!-- SEÇÃO SOBRE MIM COM OS NOVOS TEXTOS -->
+        <div class="box bg-sobre" id="sobre">
+            <div class="titulo"><i class="fas fa-user-tie" style="color: var(--amarelo-claro);"></i> Sobre Mim</div>
+            
+            <div class="sobre-box">
+                <h3>💼 Minha Trajetória em Tecnologia</h3>
+                <p>Construí minha trajetória profissional ao longo de mais de 10 anos em Tecnologia da Informação, atuando com sustentação de sistemas corporativos, análise e resolução de incidentes e bancos de dados SQL Server. Essa experiência fortaleceu minha capacidade analítica, atenção à qualidade das informações e compreensão dos desafios operacionais e das necessidades do negócio.</p>
+            </div>
+            
+            <div class="sobre-box">
+                <h3>📊 Minha Jornada em Dados e Business Intelligence</h3>
+                <p>Atualmente, direciono minha experiência em tecnologia para a área de Dados, com foco em Business Intelligence e análise de informações. Desenvolvo conhecimentos em Power BI, SQL, modelagem de dados, DAX e Power Query, buscando transformar dados brutos em informações estruturadas, indicadores relevantes e visualizações que facilitem a interpretação dos resultados.</p>
+            </div>
+            
+            <div class="sobre-box">
+                <h3>🎯 Meu Objetivo Profissional</h3>
+                <p>Meu objetivo é unir experiência prática em TI, raciocínio analítico e visão de negócio para desenvolver dashboards e soluções de BI que apoiem a tomada de decisão. Busco oportunidades em Análise de Dados e Business Intelligence nas quais possa contribuir com minha bagagem técnica, evoluir continuamente e gerar valor por meio dos dados.</p>
+            </div>
+        </div>
+
+        <div id="projetos">
+            <div class="titulo"><i class="fas fa-briefcase" style="color: var(--amarelo-claro);"></i> Projetos e Experiências</div>
+            <div class="grid-proj">
+                <div class="card" onclick="abrirPagina('suporte')">
+                    <img src="Imagens/imagens_capa/imagemSuporte.jpg" alt="Suporte">
+                    <div class="card-body">
+                        <h3>Sustentação de TI & SQL</h3>
+                        <p>+10 anos resolvendo incidentes, garantindo estabilidade de sistemas e administrando bancos de dados críticos.</p>
+                        <div class="card-link">Ver detalhes <i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+                <div class="card" onclick="abrirPagina('netflix')">
+                    <img src="Imagens/imagens_capa/imagemNetflix.jpg" alt="Netflix">
+                    <div class="card-body">
+                        <h3>Análise de Dados (Netflix)</h3>
+                        <p>Pipeline completo de ETL com Python (Pandas) e criação de dashboard interativo no Power BI.</p>
+                        <div class="card-link">Ver detalhes <i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+                <div class="card" onclick="abrirPagina('gastronomia')">
+                    <img src="Imagens/imagens_capa/ImagemGastronomia.jpg" alt="Gastronomia">
+                    <div class="card-body">
+                        <h3>Setor Gastronômico Niterói</h3>
+                        <p>Mapeamento do mercado de restaurantes locais, analisando densidade comercial e maturidade digital.</p>
+                        <div class="card-link">Ver detalhes <i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+                <div class="card" onclick="abrirPagina('arquitetura')">
+                    <img src="Imagens/imagens_capa/imagemArquitetura.jpg" alt="Arquitetura">
+                    <div class="card-body">
+                        <h3>Canal de Arquitetura</h3>
+                        <p>Estudo de caso sobre eficiência de postagens em um canal do YouTube, descobrindo o melhor retorno por vídeo.</p>
+                        <div class="card-link">Ver detalhes <i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box bg-habilidades" id="habilidades">
+            <div class="titulo"><i class="fas fa-microchip" style="color: var(--amarelo-claro);"></i> Habilidades Técnicas</div>
+            <div class="skills">
+                <span class="skill">Suporte e Sustentação de TI</span>
+                <span class="skill">SQL Server</span>
+                <span class="skill">Power BI</span>
+                <span class="skill">DAX & Power Query</span>
+                <span class="skill">Modelagem de Dados</span>
+                <span class="skill">Análise de Dados</span>
+            </div>
+        </div>
+
+        <div class="footer bg-footer">
+            <h2>Vamos conversar?</h2>
+            <p>Estou disponível para oportunidades em Suporte de TI e Análise de Dados.</p>
+            <div class="botoes" style="justify-content: center;">
+                <button class="btn btn-cv" onclick="abrirPagina('curriculo')"><i class="fas fa-file-alt"></i> Currículo</button>
+                <a class="btn btn-em" href="mailto:anderson_rdo@hotmail.com"><i class="fas fa-envelope"></i> Enviar E-mail</a>
+                <a class="btn btn-wa" href="https://wa.me/5521979388819" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            </div>
+            <a href="mailto:anderson_rdo@hotmail.com" class="email-link"><i class="fas fa-envelope"></i> anderson_rdo@hotmail.com</a>
+        </div>
+    </div>
+
+    <!-- PÁGINA DO CURRÍCULO -->
+    <div id="pagina-curriculo" class="pagina">
+        <div class="pagina-content">
+            <div class="btn-voltar" onclick="voltarInicio()">← Voltar para o Portfólio</div>
+            
+            <div class="cv-box">
+                <a href="https://drive.google.com/uc?export=download&id=15uO4079u1ArXHdgCTy6jxTSyw0wliKfA" class="btn-download" target="_blank">
+                    <i class="fas fa-download"></i> Baixar Currículo em PDF
+                </a>
+
+                <h1>ANDERSON RÊGO DE OLIVEIRA</h1>
+                <p class="cv-sub">Analista de Dados | Power BI | SQL | Python | Business Intelligence<br>Niterói - RJ • (21) 97938-8819 • anderson_rdo@hotmail.com</p>
+
+                <h2>RESUMO PROFISSIONAL</h2>
+                <p>Analista de Dados com mais de 10 anos de experiência em Tecnologia da Informação, com sólida atuação em sustentação de sistemas críticos e administração de bancos de dados SQL Server. Especialista em Power BI para criação de dashboards, relatórios interativos e modelagem de dados, com certificação concluída pela Udemy. Experiência em análise de dados, ETL, transformação e visualização de dados para suporte à tomada de decisão data-driven. Domínio de SQL avançado, Python (Pandas, NumPy) e fundamentos de Machine Learning.</p>
+
+                <h2>EXPERIÊNCIA PROFISSIONAL</h2>
+                <h3>Soma Tecnologia — Analista / Assistente Técnico <span class="cv-data">2013 – 2025</span></h3>
+                <ul>
+                    <li>Sustentação de sistemas corporativos em ambiente produtivo de alta disponibilidade</li>
+                    <li>Administração e manutenção de bancos de dados SQL Server: queries, stored procedures e análise de dados</li>
+                    <li>Análise e resolução de incidentes técnicos (troubleshooting), com foco em disponibilidade e performance</li>
+                    <li>Validação, extração e análise de dados via SQL para suporte à tomada de decisão</li>
+                    <li>Monitoramento de serviços e garantia de SLA em ambientes produtivos</li>
+                </ul>
+
+                <h2>FORMAÇÃO ACADÊMICA</h2>
+                <h3>Bacharelado em Sistemas de Informação — Estácio <span class="cv-data">2021</span></h3>
+
+                <h2>CERTIFICAÇÕES</h2>
+                <ul>
+                    <li><strong>Power BI – Do Básico ao Avançado | Udemy (Concluído)</strong></li>
+                    <li><strong>Machine Learning aplicado a dados | Kaggle (em andamento)</strong></li>
+                </ul>
+
+                <h2>HABILIDADES TÉCNICAS</h2>
+                <ul>
+                    <li><strong>Power BI:</strong> dashboards, relatórios interativos, modelagem de dados, DAX, Power Query</li>
+                    <li><strong>SQL Server:</strong> consultas complexas, JOIN, subqueries, procedures</li>
+                    <li><strong>Python:</strong> Pandas, NumPy, Matplotlib, Seaborn</li>
+                    <li><strong>Outros:</strong> Excel avançado, Git, IA generativa (ChatGPT, Gemini, Grok)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINAS DE DETALHES DOS PROJETOS -->
+    <div id="pagina-suporte" class="pagina">
+        <div class="pagina-content">
+            <div class="btn-voltar" onclick="voltarInicio()">← Voltar</div>
+            <h1>💻 Sustentação de TI & SQL Server</h1>
+            <p>Com mais de 10 anos de experiência, construí uma carreira sólida garantindo que a tecnologia fosse uma aliada estratégica para o negócio.</p>
+            <h4>🛠️ O que eu fazia</h4>
+            <ul>
+                <li><strong>Suporte e Sustentação (N1 e N2):</strong> Atendimento a usuários e resolução de incidentes.</li>
+                <li><strong>Administração de Banco de Dados (SQL Server):</strong> Consultas SQL e análise de integridade.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="pagina-netflix" class="pagina">
+        <div class="pagina-content">
+            <div class="btn-voltar" onclick="voltarInicio()">← Voltar</div>
+            <h1>🚀 ETL + BI: Análise de Dados (Netflix)</h1>
+            <p><strong>⚠️ Nota:</strong> Dados gerados por IA para estudo.</p>
+            <h4>🐍 Etapa 1 - Python (Pandas)</h4>
+            <ul>
+                <li>Limpeza e exploração inicial dos dados.</li>
+                <li>Tratamento de valores negativos e nulos.</li>
+            </ul>
+            <div class="imgs">
+                <img src="Imagens/Netflix/foto1.jfif" alt="Dashboard Netflix" onclick="abrirLightbox(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div id="pagina-gastronomia" class="pagina">
+        <div class="pagina-content">
+            <div class="btn-voltar" onclick="voltarInicio()">← Voltar</div>
+            <h1>📊 Setor Gastronômico de Niterói</h1>
+            <p>Mapeamento do mercado de restaurantes em Niterói/RJ, com foco em densidade comercial e maturidade digital.</p>
+            <div class="imgs">
+                <img src="Imagens/Setor_Gastronomico/foto1.jfif" onclick="abrirLightbox(this.src)">
+                <img src="Imagens/Setor_Gastronomico/foto2.jfif" onclick="abrirLightbox(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div id="pagina-arquitetura" class="pagina">
+        <div class="pagina-content">
+            <div class="btn-voltar" onclick="voltarInicio()">← Voltar</div>
+            <h1>📈 Análise de Desempenho: Canal de Arquitetura</h1>
+            <p>Estudo de caso sobre eficiência de postagens em um canal do YouTube, descobrindo que menos vídeos geraram mais resultados.</p>
+            <div class="imgs">
+                <img src="Imagens/graficos _arquitetura/foto1.jpg" onclick="abrirLightbox(this.src)">
+                <img src="Imagens/graficos _arquitetura/foto2.jpg" onclick="abrirLightbox(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div id="lightbox" class="lightbox" onclick="fecharLightbox()">
+        <img id="img-ampliada" src="" alt="Ampliada">
+    </div>
+
+    <script>
+        function abrirPagina(id) {
+            document.getElementById('tela-principal').style.display = 'none';
+            document.getElementById('pagina-' + id).style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function voltarInicio() {
+            const paginas = document.querySelectorAll('.pagina');
+            paginas.forEach(p => p.style.display = 'none');
+            document.getElementById('tela-principal').style.display = 'flex';
+            window.scrollTo(0, 0);
+        }
+
+        function abrirLightbox(src) {
+            document.getElementById('img-ampliada').src = src;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function fecharLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
