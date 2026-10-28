@@ -8,28 +8,40 @@
 <style>
 :root{--bg:#1a1c23;--card:#22252d;--borda:#323642;--amarelo:#facc15;--amarelo-claro:#fde047;--texto:#fff;--cinza:#a1a1aa}
 *{box-sizing:border-box}
-body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);background-image:radial-gradient(circle at 80% 0%,#2a2d36 0%,var(--bg) 60%);color:var(--texto);line-height:1.6}
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);background-image:radial-gradient(circle at 80% 0%,#2a2d36 0%,var(--bg) 60%);color:var(--texto);line-height:1.6;overflow-x:hidden}
 .nav{position:fixed;top:20px;width:100%;display:flex;justify-content:center;z-index:1000}
 nav{background:rgba(34,37,45,0.9);border:1px solid var(--borda);border-radius:50px;padding:12px 35px;display:flex;gap:30px;box-shadow:0 10px 30px rgba(0,0,0,0.5);backdrop-filter:blur(10px)}
 nav a{color:var(--cinza);text-decoration:none;font-size:14px;font-weight:600;cursor:pointer}
 nav a:hover{color:var(--amarelo-claro)}
 .container{max-width:1200px;margin:0 auto;padding:120px 20px 60px 20px;display:flex;flex-direction:column;gap:30px}
 .box{background:var(--card);border:1px solid var(--borda);border-radius:24px;padding:40px;transition:0.4s;position:relative;overflow:hidden}
+
+/* FUNDOS DINÂMICOS */
 .bg-hero{background-image:linear-gradient(rgba(34,37,45,0.95),rgba(34,37,45,0.95)),url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop');background-size:cover;background-position:center}
+.bg-footer{background-image:linear-gradient(rgba(34,37,45,0.9),rgba(34,37,45,0.9)),url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1000&auto=format&fit=crop');background-size:cover;background-position:center}
+
 .hero{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
 .hero-text{flex:1;min-width:300px;z-index:2}
 .hero h1{font-size:46px;margin:0 0 15px 0;line-height:1.1}
 .hero h1 span{color:var(--cinza);font-style:italic}
 .hero p{color:var(--cinza);font-size:18px;margin-bottom:30px}
 .botoes{display:flex;gap:12px;flex-wrap:wrap}
-.btn{padding:14px 24px;border-radius:50px;font-weight:600;border:none;cursor:pointer;transition:0.3s;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:15px;text-decoration:none}
-.btn:hover{transform:translateY(-3px)}
-.btn-wa{background:#25D366;color:#fff}
-.btn-in{background:#0077b5;color:#fff}
-.btn-em{background:#4f46e5;color:#fff}
-.btn-gh{background:#24292e;color:#fff;border:1px solid #444d56}
-.btn-cv{background:#3b3f4a;color:var(--amarelo);border:1px solid var(--amarelo)}
+
+/* BOTÕES MINIMALISTAS */
+.btn{padding:12px 24px;border-radius:50px;font-weight:600;border:1px solid transparent;cursor:pointer;transition:all 0.3s ease;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:15px;text-decoration:none;background-color:var(--card);color:var(--texto)}
+.btn:hover{transform:translateY(-2px);border-color:var(--amarelo);box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+.btn:active{transform:translateY(0)}
+.btn-wa{background:rgba(37,211,102,0.1);color:#25D366;border-color:rgba(37,211,102,0.2)}
+.btn-wa:hover{background:#25D366;color:#fff;border-color:#25D366}
+.btn-in{background:rgba(0,119,181,0.1);color:#0077b5;border-color:rgba(0,119,181,0.2)}
+.btn-in:hover{background:#0077b5;color:#fff;border-color:#0077b5}
+.btn-em{background:rgba(79,70,229,0.1);color:#818cf8;border-color:rgba(79,70,229,0.2)}
+.btn-em:hover{background:#4f46e5;color:#fff;border-color:#4f46e5}
+.btn-gh{background:rgba(255,255,255,0.05);color:#fff;border-color:rgba(255,255,255,0.1)}
+.btn-gh:hover{background:#24292e;color:#fff;border-color:#444}
+.btn-cv{background:transparent;color:var(--amarelo);border-color:var(--amarelo)}
 .btn-cv:hover{background:var(--amarelo);color:#111}
+
 .hero-img{position:relative}
 .foto{width:280px;height:280px;border-radius:50%;object-fit:cover;border:2px solid var(--borda);position:relative;z-index:2}
 .glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;height:300px;background:var(--amarelo);filter:blur(80px);opacity:0.15;z-index:1;border-radius:50%}
@@ -50,14 +62,17 @@ nav a:hover{color:var(--amarelo-claro)}
 .card-link{color:var(--amarelo-claro);font-weight:600;font-size:15px;display:flex;align-items:center;gap:8px}
 .skills{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
 .skill{background:rgba(26,28,35,0.8);border:1px solid rgba(250,204,21,0.3);color:var(--amarelo-claro);padding:10px 20px;border-radius:50px;font-size:15px;font-weight:600}
-.footer{text-align:center;padding:60px 20px;border-radius:24px;border:1px solid var(--borda);margin-top:20px}
+
+/* RODAPÉ ATUALIZADO */
+.footer{text-align:center;padding:60px 20px;border-radius:24px;border:1px solid var(--borda);margin-top:20px;position:relative;z-index:2}
 .footer h2{font-size:26px}
 .footer p{color:var(--cinza);margin-bottom:30px}
 .email-link{display:block;margin-top:30px;font-size:18px;color:var(--cinza);text-decoration:none}
 .email-link:hover{color:var(--amarelo)}
+
 .pagina{display:none;background:var(--bg);min-height:100vh;padding-top:100px;padding-bottom:80px}
 .pagina-content{max-width:900px;margin:0 auto;padding:0 20px}
-.btn-voltar{display:inline-flex;align-items:center;background:var(--card);color:var(--texto);padding:12px 24px;border-radius:50px;cursor:pointer;margin-bottom:40px;border:1px solid var(--borda);font-weight:600}
+.btn-voltar{display:inline-flex;align-items:center;background:var(--card);color:var(--texto);padding:12px 24px;border-radius:50px;cursor:pointer;margin-bottom:40px;border:1px solid var(--borda);font-weight:600;transition:0.3s}
 .btn-voltar:hover{background:var(--amarelo);color:#111}
 .pagina h1{font-size:38px;color:var(--amarelo-claro);margin-bottom:25px}
 .pagina h4{font-size:22px;margin-top:40px;border-bottom:1px solid var(--borda);padding-bottom:8px}
@@ -78,7 +93,16 @@ nav a:hover{color:var(--amarelo-claro)}
 .imgs img{width:100%;border-radius:12px;border:1px solid var(--borda);cursor:zoom-in}
 .lightbox{display:none;position:fixed;z-index:2000;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);align-items:center;justify-content:center;cursor:zoom-out}
 .lightbox img{max-width:95%;max-height:95vh;border-radius:12px}
-@media (max-width:900px){body{overflow-x:hidden}.hero{flex-direction:column-reverse;text-align:center}.botoes{justify-content:center}.cv-box{padding:25px}.grid-proj{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr;gap:15px;text-align:center}.stats h2{font-size:32px}.stats p{font-size:12px}}
+
+@media (max-width:900px){
+    .hero{flex-direction:column-reverse;text-align:center}
+    .botoes{justify-content:center}
+    .cv-box{padding:25px}
+    .grid-proj{grid-template-columns:1fr}
+    .stats{grid-template-columns:1fr 1fr;gap:15px;text-align:center}
+    .stats h2{font-size:32px}
+    .stats p{font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -87,7 +111,7 @@ nav a:hover{color:var(--amarelo-claro)}
 <div id="tela-principal" class="container">
 <div class="box hero bg-hero">
 <div class="hero-text">
-<span style="color:var(--amarelo-claro);font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:1px">Olá, eu sou Anderson!</span>
+<span style="color:var(--amarelo-claro);font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:1px">Olá, eu sou o Anderson!</span>
 <h1>Construindo soluções em <span>Dados e Tecnologia.</span></h1>
 <p>Mais de 10 anos de experiência em TI, direcionando minha carreira para Análise de Dados e Business Intelligence.</p>
 <div class="botoes">
@@ -147,7 +171,7 @@ nav a:hover{color:var(--amarelo-claro)}
 </div>
 </div>
 
-<div class="footer">
+<div class="footer bg-footer">
 <h2>Vamos conversar?</h2>
 <p>Estou disponível para oportunidades em Suporte de TI e Análise de Dados.</p>
 <div class="botoes" style="justify-content:center">
@@ -297,61 +321,38 @@ nav a:hover{color:var(--amarelo-claro)}
 
 <div id="lightbox" class="lightbox" onclick="fecharLightbox()"><img id="img-ampliada" src="" alt="Ampliada"></div>
 
-<!-- ÁUDIO DE CLIQUE -->
-<audio id="som-clique" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
-
 <script>
-// Função para tocar o som
-function tocarSom() {
-    const som = document.getElementById('som-clique');
-    if (som) {
-        som.currentTime = 0; // Reinicia o som para cliques rápidos
-        som.play().catch(e => console.log("Áudio bloqueado pelo navegador até a primeira interação."));
-    }
-}
-
-// Abre a página, toca o som e adiciona ao histórico do navegador
 function abrirPagina(id) {
-    tocarSom();
     document.getElementById('tela-principal').style.display = 'none';
     document.querySelectorAll('.pagina').forEach(p => p.style.display = 'none');
     document.getElementById('pagina-' + id).style.display = 'block';
     window.scrollTo(0, 0);
-    // Adiciona um estado no histórico para o botão voltar do navegador funcionar
     history.pushState({ pagina: id }, '', '#' + id);
 }
 
-// Volta para a tela inicial, toca o som (se for clique manual)
 function voltarInicio(manual = false) {
-    if (manual) tocarSom();
     document.querySelectorAll('.pagina').forEach(p => p.style.display = 'none');
     document.getElementById('tela-principal').style.display = 'flex';
     window.scrollTo(0, 0);
-    // Se for manual, limpa o histórico para não precisar clicar várias vezes
     if (manual) {
         history.replaceState(null, '', window.location.pathname);
     }
 }
 
-// Ouve o botão "Voltar" do navegador
 window.addEventListener('popstate', function(event) {
-    // Se o estado for de uma página de projeto, mantém nela
     if (event.state && event.state.pagina) {
         document.getElementById('tela-principal').style.display = 'none';
         document.querySelectorAll('.pagina').forEach(p => p.style.display = 'none');
         document.getElementById('pagina-' + event.state.pagina).style.display = 'block';
         window.scrollTo(0, 0);
     } else {
-        // Se não tiver estado, volta para a tela inicial
         document.querySelectorAll('.pagina').forEach(p => p.style.display = 'none');
         document.getElementById('tela-principal').style.display = 'flex';
         window.scrollTo(0, 0);
     }
 });
 
-// Funções do Lightbox (também com som)
 function abrirLightbox(src) {
-    tocarSom();
     document.getElementById('img-ampliada').src = src;
     document.getElementById('lightbox').style.display = 'flex';
 }
@@ -362,4 +363,3 @@ function fecharLightbox() {
 </script>
 </body>
 </html>
-body { overflow-x: hidden; }
